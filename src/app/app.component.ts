@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
+import firebase from 'firebase';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -17,6 +19,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    this.initializeFirebase();
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -33,6 +36,17 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+    });
+  }
+
+  initializeFirebase() {
+    firebase.initializeApp({
+      apiKey: "AIzaSyCwFOKH0393ngVWAUMByv5lZKBd1jtoyiM",
+      authDomain: "deau-8e28f.firebaseapp.com",
+      databaseURL: "https://deau-8e28f.firebaseio.com",
+      projectId: "deau-8e28f",
+      storageBucket: "deau-8e28f.appspot.com",
+      messagingSenderId: "1028891332988",
     });
   }
 

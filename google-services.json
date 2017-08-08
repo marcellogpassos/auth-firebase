@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1028891332988",
+    "firebase_url": "https://deau-8e28f.firebaseio.com",
+    "project_id": "deau-8e28f",
+    "storage_bucket": "deau-8e28f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028891332988:android:58e72b8ad8fd1289",
+        "android_client_info": {
+          "package_name": "com.marcellopassos.deau"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028891332988-t789t7jqgiu4lv09hkqh3mo1dh1qa8n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkQZlX4kZ5jiDDaLnEmdHHN6aq4DKMVvc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
