@@ -1,0 +1,129 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Novo usuário</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content scroll="false" padding>
+
+<form [formGroup]="accountDataForm" novalidate>
+
+  <ion-list [hidden]="step != STEP_ACCOUNT_DATA">
+
+    <ion-item>
+      <ion-label floating>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.personal.nome" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!accountDataForm.controls.nome.valid  && accountDataForm.controls.nome.dirty"
+      class="error-message" ><p>O campo "Nome" é obrigatório.</p></ion-item>
+
+    <ion-item>
+      <ion-label floating>Sobrenome</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.personal.sobrenome" formControlName="sobrenome"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!accountDataForm.controls.sobrenome.valid && accountDataForm.controls.sobrenome.dirty" 
+      class="error-message"><p>O campo "Sobrenome" é obrigatório.</p></ion-item>
+
+    <ion-item>
+      <ion-label floating>E-mail</ion-label>
+      <ion-input type="email" [(ngModel)]="newUser.credentials.email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!accountDataForm.controls.email.valid  && accountDataForm.controls.email.dirty"
+      class="error-message" ><p>Forneça um e-mail válido.</p></ion-item>
+
+    <ion-item>
+      <ion-label floating>Senha</ion-label>
+      <ion-input type="password" [(ngModel)]="newUser.credentials.password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!accountDataForm.controls.password.valid  && accountDataForm.controls.password.dirty"
+      class="error-message" ><p>Sua senha precisa ter mais de 6 caracteres.</p></ion-item>
+
+    <ion-item>
+      <ion-label floating>Confirme a senha</ion-label>
+      <ion-input type="password" [(ngModel)]="passwordConfirmation" formControlName="passwordConfirmation"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="accountDataForm.controls.passwordConfirmation.errors?.MatchPassword && accountDataForm.controls.passwordConfirmation.dirty"
+      class="error-message"><p>As senhas não conferem.</p></ion-item>
+
+  </ion-list>
+
+</form>
+
+<form [formGroup]="personalDataForm" novalidate>
+
+  <ion-list [hidden]="step != STEP_PERSONAL_DATA">
+
+    <ion-item>
+      <ion-label>Sexo</ion-label>
+      <ion-select [(ngModel)]="newUser.personal.sexo" formControlName="sexo">
+        <ion-option value="F">Feminino</ion-option>
+        <ion-option value="M">Masculino</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Data de nascimento</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [max]="maxDate" [(ngModel)]="newUser.personal.data_nascimento" 
+        formControlName="data_nascimento"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>CPF</ion-label>
+      <ion-input type="number" [(ngModel)]="newUser.personal.cpf" formControlName="cpf"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="personalDataForm.controls.cpf.errors?.invalidCPF && personalDataForm.controls.cpf.dirty"
+      class="error-message"><p>CPF inválido.</p></ion-item>
+
+    <ion-item>
+      <ion-label floating>Telefone</ion-label>
+      <ion-input type="number" [(ngModel)]="newUser.personal.telefone" formControlName="telefone"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!personalDataForm.controls.telefone.valid && personalDataForm.controls.telefone.dirty"
+      class="error-message"><p>O campo "Telefone" é obrigatório e deve ter 8 ou 9 dígitos.</p></ion-item>
+
+  </ion-list>
+
+</form>
+
+
+</ion-content>
+
+<ion-footer style="background-color: #e8eaf6;">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="center">
+        <ion-icon [name]="step == STEP_ACCOUNT_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
+        <ion-icon [name]="step == STEP_PERSONAL_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
+        <ion-icon [name]="step == STEP_ADDRESS_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="step > STEP_ACCOUNT_DATA">
+        <button ion-button block (click)="previous()" color="light">Voltar</button>
+      </ion-col>
+      <ion-col *ngIf="step == STEP_ACCOUNT_DATA">
+        <button ion-button block (click)="next()" [disabled]="!accountDataForm.valid">Avançar</button>
+      </ion-col>
+      <ion-col *ngIf="step == STEP_PERSONAL_DATA">
+        <button ion-button block (click)="next()" [disabled]="!personalDataForm.valid">Avançar</button>
+      </ion-col>
+      <ion-col *ngIf="step == STEP_ADDRESS_DATA">
+        <button ion-button block (click)="signupUser()" [disabled]="!accountDataForm.valid || !personalDataForm.valid || !addressDataForm.valid">Finalizar Cadastro</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <br>  
+    </ion-row>
+  </ion-grid>
+</ion-footer>
+

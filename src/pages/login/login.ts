@@ -11,6 +11,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 
 import firebase from 'firebase';
+import { SignupPage } from "../signup/signup";
 
 /**
  * Generated class for the LoginPage page.
@@ -84,7 +85,7 @@ export class LoginPage {
   }
 
   goToSignup(): void { 
-    // this.navCtrl.push('signup'); 
+    this.navCtrl.push(SignupPage);
   }
 
   goToResetPassword(): void { 

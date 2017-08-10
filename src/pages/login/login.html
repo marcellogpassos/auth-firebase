@@ -12,17 +12,17 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content scroll="false" padding>
 
-   <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-img class="logo" width="80" height="80" src="http://lorempixel.com/96/96/city"></ion-img>
-        </ion-col>
-      </ion-row>
-   </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-img class="logo" width="80" height="80" src="http://lorempixel.com/96/96/city"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-   <br>
+  <br>
 
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
 
@@ -30,8 +30,7 @@
 
       <ion-item>
         <ion-label floating>E-mail</ion-label>
-        <ion-input [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty"
-          formControlName="email" type="email"></ion-input>
+        <ion-input formControlName="email" type="email"></ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">
         <p>Forneça um e-mail válido.</p>
@@ -39,8 +38,7 @@
 
       <ion-item>
         <ion-label floating>Senha</ion-label>
-        <ion-input [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"
-          formControlName="password" type="password"></ion-input>
+        <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">
         <p>Sua senha precisa ter mais de 6 caracteres.</p>
@@ -49,13 +47,11 @@
     </ion-list>
 
     <ion-grid>
-
       <ion-row>
         <ion-col>
           <button ion-button block type="submit" [disabled]="!loginForm.valid"> Fazer Login </button>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col>
           <button ion-button icon-left block outline (click)="googleLogin()">
@@ -63,18 +59,19 @@
           </button>
         </ion-col>
       </ion-row>
-
-      <ion-row>
-        <ion-col justify-content-start>
-          <button ion-button clear (click)="goToSignup()"> Novo usuário </button>
-        </ion-col>
-        <ion-col justify-content-end>
-          <button ion-button clear (click)="goToResetPassword()"> Recuperar senha </button>
-        </ion-col>
-      </ion-row>
-
     </ion-grid>
 
   </form>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col justify-content-start>
+        <button ion-button clear (click)="goToSignup()"> Novo usuário </button>
+      </ion-col>
+      <ion-col justify-content-end>
+        <button ion-button clear (click)="goToResetPassword()"> Recuperar senha </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
