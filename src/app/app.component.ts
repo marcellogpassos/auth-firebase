@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 import firebase from 'firebase';
+import { AuthProvider } from "../providers/auth/auth";
+import { LoginPage } from "../pages/login/login";
 
 @Component({
   templateUrl: 'app.html'
@@ -16,16 +18,18 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{id: number, title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+    public auth: AuthProvider, public alertCtrl: AlertController) {
     this.initializeFirebase();
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { id: 1, title: 'Home', component: HomePage },
+      { id: 2, title: 'List', component: ListPage },
+      { id: 0, title: 'Logout', component: null }
     ];
 
   }
@@ -51,8 +55,24 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if(!page.id)
+      this.logout();
+    else    
+      this.nav.setRoot(page.component);
   }
+
+  logout() {
+    this.auth.logoutUser().then(
+      () => {
+        console.log("Bye! I'll miss you... :(");
+        this.nav.setRoot(LoginPage);
+      }, error => {
+        this.alertCtrl.create({
+          message: "Falha ao tentar realizar o logout!",
+          buttons: [{ text: "Ok", role: 'cancel'  }]
+        }).present();
+      }
+    );
+  }
+
 }

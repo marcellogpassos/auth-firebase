@@ -8,10 +8,5 @@
 </ion-header>
 
 <ion-content padding>
-  <h3 *ngIf="!userProfile">Usuário não autenticado!</h3>
   <h3 *ngIf="userProfile">{{ userProfile.email }}</h3>
-
-  <button ion-button block (click)="googleLogin()" *ngIf="!userProfile">
-    GOOGLE LOGIN
-  </button>
 </ion-content>
