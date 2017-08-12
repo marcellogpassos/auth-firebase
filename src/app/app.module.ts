@@ -12,6 +12,8 @@ import { SignupPage } from "../pages/signup/signup";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
+import { AddressProvider } from '../providers/address/address';
+import { GoogleapiGeocodeProvider } from '../providers/googleapi-geocode/googleapi-geocode';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    AddressProvider,
+    GoogleapiGeocodeProvider
   ]
 })
 export class AppModule {}

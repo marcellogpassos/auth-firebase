@@ -14,13 +14,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log(user);
+      if (user) 
         this.userProfile = user;
-        console.log(this.userProfile);
-      } else {
+      else
         this.navCtrl.setRoot(LoginPage);
-      }
     });
   }
 

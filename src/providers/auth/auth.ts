@@ -29,9 +29,13 @@ export class AuthProvider {
     return firebase.auth().sendPasswordResetEmail(email);
   }
 
-  signupUser(email: string, password: string): firebase.Promise<any> {
-    return firebase.auth().createUserWithEmailAndPassword(email, password).then( newUser => {
-      firebase.database().ref('/userProfile').child(newUser.uid).set({ email: email });
+  signupUser(newUser: any): firebase.Promise<any> {
+    return firebase.auth().createUserWithEmailAndPassword(newUser.credentials.email, newUser.credentials.password).then( userCreated => {
+      firebase.database().ref('/userProfile').child(userCreated.uid).set({ 
+        email: newUser.credentials.email,
+        personal: newUser.personal,
+        address: newUser.address
+      });
     });
   }
 

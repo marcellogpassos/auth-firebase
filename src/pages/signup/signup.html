@@ -12,8 +12,6 @@
 
 </ion-header>
 
-
-
 <ion-content scroll="false" padding>
 
 <form [formGroup]="accountDataForm" novalidate>
@@ -95,6 +93,66 @@
 
 </form>
 
+<form [formGroup]="addressDataForm" novalidate>
+
+  <ion-list [hidden]="step != STEP_ADDRESS_DATA">
+
+    <ion-item>
+      <ion-label floating>CEP</ion-label>
+      <ion-input type="number" [(ngModel)]="newUser.address.cep" formControlName="cep"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!addressDataForm.controls.cep.valid && addressDataForm.controls.cep.dirty"
+      class="error-message"><p>O campo "CEP" deve ter 8 dígitos.</p></ion-item>
+    
+    <ion-item>
+      <button ion-button block type="button" (click)="consultarCep()" [hidden]="cepConsultado"
+        [disabled]="!addressDataForm.controls.cep.valid">
+        Consultar CEP
+      </button>
+      <button ion-button block type="button" (click)="limparCep()" [hidden]="!cepConsultado">
+        Limpar CEP
+      </button>
+    </ion-item>
+
+    <ion-item [hidden]="!cepConsultado">
+      <ion-label floating>UF</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.address.uf" formControlName="uf" readonly></ion-input>
+    </ion-item>
+
+    <ion-item [hidden]="!cepConsultado">
+      <ion-label floating>Município</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.address.municipio" formControlName="municipio" readonly></ion-input>
+    </ion-item>
+
+    <ion-item [hidden]="!cepConsultado">
+      <ion-label floating>Bairro</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.address.bairro" formControlName="bairro"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!addressDataForm.controls.bairro.valid && addressDataForm.controls.bairro.dirty && cepConsultado"
+      class="error-message"><p>O campo "Bairro" é obrigatório.</p></ion-item>
+
+    <ion-item [hidden]="!cepConsultado">
+      <ion-label floating>Logradouro</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.address.logradouro" formControlName="logradouro"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!addressDataForm.controls.logradouro.valid && addressDataForm.controls.logradouro.dirty && cepConsultado"
+      class="error-message"><p>O campo "Logradouro" é obrigatório.</p></ion-item>
+
+    <ion-item [hidden]="!cepConsultado">
+      <ion-label floating>Número</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.address.numero" formControlName="numero"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!addressDataForm.controls.numero.valid && addressDataForm.controls.numero.dirty && cepConsultado"
+      class="error-message"><p>O campo "Número" é obrigatório.</p></ion-item>
+
+    <ion-item [hidden]="!cepConsultado">
+      <ion-label floating>Complemento</ion-label>
+      <ion-input type="text" [(ngModel)]="newUser.address.complemento" formControlName="complemento"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+</form>
 
 </ion-content>
 
@@ -111,12 +169,21 @@
       <ion-col *ngIf="step > STEP_ACCOUNT_DATA">
         <button ion-button block (click)="previous()" color="light">Voltar</button>
       </ion-col>
-      <ion-col *ngIf="step == STEP_ACCOUNT_DATA">
+      
+      <!-- <ion-col *ngIf="step == STEP_ACCOUNT_DATA">
         <button ion-button block (click)="next()" [disabled]="!accountDataForm.valid">Avançar</button>
       </ion-col>
       <ion-col *ngIf="step == STEP_PERSONAL_DATA">
         <button ion-button block (click)="next()" [disabled]="!personalDataForm.valid">Avançar</button>
+      </ion-col> -->
+
+      <ion-col *ngIf="step == STEP_ACCOUNT_DATA">
+        <button ion-button block (click)="next()" [disabled]="false">Avançar</button>
       </ion-col>
+      <ion-col *ngIf="step == STEP_PERSONAL_DATA">
+        <button ion-button block (click)="next()" [disabled]="false">Avançar</button>
+      </ion-col>
+
       <ion-col *ngIf="step == STEP_ADDRESS_DATA">
         <button ion-button block (click)="signupUser()" [disabled]="!accountDataForm.valid || !personalDataForm.valid || !addressDataForm.valid">Finalizar Cadastro</button>
       </ion-col>
