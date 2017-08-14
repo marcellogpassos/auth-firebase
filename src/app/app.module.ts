@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { AddressProvider } from '../providers/address/address';
 import { GoogleapiGeocodeProvider } from '../providers/googleapi-geocode/googleapi-geocode';
+import { EstabelecimentosProvider } from '../providers/estabelecimentos/estabelecimentos';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GoogleapiGeocodeProvider } from '../providers/googleapi-geocode/googlea
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     AddressProvider,
-    GoogleapiGeocodeProvider
+    GoogleapiGeocodeProvider,
+    EstabelecimentosProvider
   ]
 })
 export class AppModule {}

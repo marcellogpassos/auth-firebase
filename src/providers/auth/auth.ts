@@ -14,7 +14,7 @@ import firebase from 'firebase';
 export class AuthProvider {
 
   constructor(public http: Http) {
-    console.log('Hello AuthProvider Provider');
+    // console.log('Hello AuthProvider Provider');
   }
 
   loginUser(email: string, password: string): firebase.Promise<any> {
