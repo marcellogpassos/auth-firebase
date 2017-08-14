@@ -154,43 +154,51 @@
 
 </form>
 
+  <ion-list>
+    <ion-item>
+      <ion-grid>
+        
+        <ion-row>
+          <ion-col class="center">
+            <ion-icon [name]="step == STEP_ACCOUNT_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
+            <ion-icon [name]="step == STEP_PERSONAL_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
+            <ion-icon [name]="step == STEP_ADDRESS_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+
+          <ion-col *ngIf="step > STEP_ACCOUNT_DATA">
+            <button ion-button block (click)="previous()" color="light">
+              Voltar</button>
+          </ion-col>
+          
+           <ion-col *ngIf="step == STEP_ACCOUNT_DATA">
+            <button ion-button block (click)="next()" [disabled]="!accountDataForm.valid">
+              Avançar</button>
+          </ion-col>
+          <ion-col *ngIf="step == STEP_PERSONAL_DATA">
+            <button ion-button block (click)="next()" [disabled]="!personalDataForm.valid">
+              Avançar</button>
+          </ion-col> 
+
+          <ion-col *ngIf="step == STEP_ADDRESS_DATA">
+            <button ion-button block (click)="signupUser()" 
+              [disabled]="!accountDataForm.valid || !personalDataForm.valid || !addressDataForm.valid">
+              Finalizar Cadastro</button>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <br>  
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
 
-<ion-footer style="background-color: #e8eaf6;">
-  <ion-grid>
-    <ion-row>
-      <ion-col class="center">
-        <ion-icon [name]="step == STEP_ACCOUNT_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
-        <ion-icon [name]="step == STEP_PERSONAL_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
-        <ion-icon [name]="step == STEP_ADDRESS_DATA ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col *ngIf="step > STEP_ACCOUNT_DATA">
-        <button ion-button block (click)="previous()" color="light">Voltar</button>
-      </ion-col>
-      
-      <!-- <ion-col *ngIf="step == STEP_ACCOUNT_DATA">
-        <button ion-button block (click)="next()" [disabled]="!accountDataForm.valid">Avançar</button>
-      </ion-col>
-      <ion-col *ngIf="step == STEP_PERSONAL_DATA">
-        <button ion-button block (click)="next()" [disabled]="!personalDataForm.valid">Avançar</button>
-      </ion-col> -->
-
-      <ion-col *ngIf="step == STEP_ACCOUNT_DATA">
-        <button ion-button block (click)="next()" [disabled]="false">Avançar</button>
-      </ion-col>
-      <ion-col *ngIf="step == STEP_PERSONAL_DATA">
-        <button ion-button block (click)="next()" [disabled]="false">Avançar</button>
-      </ion-col>
-
-      <ion-col *ngIf="step == STEP_ADDRESS_DATA">
-        <button ion-button block (click)="signupUser()" [disabled]="!accountDataForm.valid || !personalDataForm.valid || !addressDataForm.valid">Finalizar Cadastro</button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <br>  
-    </ion-row>
-  </ion-grid>
-</ion-footer>
+<!-- <ion-footer style="background-color: #e8eaf6;">
+  
+</ion-footer> -->
 

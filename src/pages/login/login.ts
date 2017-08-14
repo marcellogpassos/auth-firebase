@@ -20,9 +20,6 @@ import { SignupPage } from "../signup/signup";
  * on Ionic pages and navigation.
  */
 
-@IonicPage({
-  name: 'login'
-})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
